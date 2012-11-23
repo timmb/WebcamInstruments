@@ -6,6 +6,7 @@
 #include "ofxMidi.h"
 
 #include "SimpleThresholdTrigger.h"
+#include "ScaleMapper.h"
 
 class testApp : public ofBaseApp{
 	
@@ -77,6 +78,8 @@ public:
 	ofxParameter<float> mThresholdValue;
 	/// openFrameworks will call this function when mThresholdValue changes
 	void thresholdValueHasChangedCallback(float& newValue);
+	/// Prevent the triggers from being updated
+	ofxParameter<bool> mMuteTriggers;
 	
 	
 	/////////////////////////////////////////////////////

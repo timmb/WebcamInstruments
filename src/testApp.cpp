@@ -15,6 +15,7 @@ void testApp::setup(){
 	mDrawRawImage = ofxParameter<bool>("Draw raw image", true);
 	mDrawBackground = ofxParameter<bool>("Draw background image", false);
 	mDrawDifferenceImage = ofxParameter<bool>("Draw thresholded image", false);
+	mMuteTriggers = ofxParameter<bool>("Mute triggers", false);
 	mTriggerCols = ofxParameter<int>("Number of trigger columns", 12);
 	mTriggerCols.setMax(MAX_TRIGGERS_IN_LINE);
 	mTriggerRows = ofxParameter<int>("Number of trigger rows", 6);
@@ -43,6 +44,7 @@ void testApp::setup(){
 	mGui.add(mBackgroundUpdateRate);
 	mGui.add(&mMidiStatus);
 	addLabelToGui("Simple threshold trigger");
+	mGui.add(mMuteTriggers);
 	mGui.add(mTriggerRows);
 	mGui.add(mTriggerCols);
 	mGui.add(mThresholdValue);
@@ -142,8 +144,16 @@ void testApp::setupTriggers()
 			
 			// Define the trigger rectangle
 			cv::Rect triggerArea = cv::Rect(left, top, width, height);
+			
+			int triggerPitch = pitch;
+			//// ** Fancy a more complex pitch mapping? Try uncommenting the following
+			//// Rather than just using the incremental pitch counter we might like to use
+			//// a more complex mapping. Here we use a ScaleMapper.
+			//Tonnetz scaleMapper;
+			//int triggerPitch = scaleMapper.getPitch(i, j, mTriggerRows, mTriggerCols);
+
 			// Create the trigger
-			SimpleThresholdTrigger* t = new SimpleThresholdTrigger(&mMidiOut, pitch, triggerArea);
+			SimpleThresholdTrigger* t = new SimpleThresholdTrigger(&mMidiOut, triggerPitch, triggerArea);
 			row.push_back(t);
 			// increment pitch
 			++pitch;
@@ -180,11 +190,14 @@ void testApp::update(){
 		{
 			setupTriggers();
 		}
-		for (int i=0; i<mTriggers.size(); ++i)
+		if (!mMuteTriggers)
 		{
-			for (int j=0; j<mTriggers[i].size(); ++j)
+			for (int i=0; i<mTriggers.size(); ++i)
 			{
-				mTriggers[i][j]->update(mDifferenceImage);
+				for (int j=0; j<mTriggers[i].size(); ++j)
+				{
+					mTriggers[i][j]->update(mDifferenceImage);
+				}
 			}
 		}
 	}
