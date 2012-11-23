@@ -67,13 +67,13 @@ void SimpleThresholdTrigger::update(cv::Mat const& differenceImage)
 		// Just in case we've gone outside of MIDI's range:
 		velocityInt = max(0, velocityInt);
 		velocityInt = min(127, velocityInt);
-		mMidiOutput->sendNoteOn(0, mMidiPitch, velocityInt);
+		mMidiOutput->sendNoteOn(1, mMidiPitch, velocityInt);
 		mNoteIsPlaying = true;
 	}
 	else if (amountAboveThreshold < 0 && mNoteIsPlaying)
 	{
 		// Stop a note by sending velocity as 0
-		mMidiOutput->sendNoteOn(0, mMidiPitch, 0);
+		mMidiOutput->sendNoteOn(1, mMidiPitch, 0);
 		mNoteIsPlaying = false;
 	}
 	// Remember the current movement for the next frame

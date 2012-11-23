@@ -13,6 +13,7 @@ void testApp::setup(){
 	
 	// Set up our parameters
 	mDrawRawImage = ofxParameter<bool>("Draw raw image", true);
+	mDrawBackground = ofxParameter<bool>("Draw background image", false);
 	mDrawDifferenceImage = ofxParameter<bool>("Draw thresholded image", false);
 	mTriggerCols = ofxParameter<int>("Number of trigger columns", 12);
 	mTriggerCols.setMax(MAX_TRIGGERS_IN_LINE);
