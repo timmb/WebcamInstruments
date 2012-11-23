@@ -52,6 +52,10 @@ private:
 	/// Use this to remember whether we are in the middle of
 	/// playing a note.
 	bool mNoteIsPlaying;
+	
+	// Misc things for visual effects
+	float mTimeNoteStarted;
+	float mNoteVelocity;
 };
 
 

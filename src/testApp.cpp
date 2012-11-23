@@ -149,8 +149,8 @@ void testApp::setupTriggers()
 			//// ** Fancy a more complex pitch mapping? Try uncommenting the following
 			//// Rather than just using the incremental pitch counter we might like to use
 			//// a more complex mapping. Here we use a ScaleMapper.
-			//Tonnetz scaleMapper;
-			//int triggerPitch = scaleMapper.getPitch(i, j, mTriggerRows, mTriggerCols);
+			Tonnetz scaleMapper;
+			triggerPitch = scaleMapper.getPitch(i, j, mTriggerRows, mTriggerCols);
 
 			// Create the trigger
 			SimpleThresholdTrigger* t = new SimpleThresholdTrigger(&mMidiOut, triggerPitch, triggerArea);

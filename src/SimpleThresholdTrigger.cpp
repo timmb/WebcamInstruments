@@ -16,6 +16,8 @@ SimpleThresholdTrigger::SimpleThresholdTrigger(ofxMidiOut* midiOutput, int pitch
 	mPreviousMovement = 0.;
 	mNoteIsPlaying = false;
 	mLocation = location;
+	mTimeNoteStarted = 0.f;
+	mNoteVelocity = 0;
 }
 
 SimpleThresholdTrigger::~SimpleThresholdTrigger()
@@ -69,6 +71,9 @@ void SimpleThresholdTrigger::update(cv::Mat const& differenceImage)
 		velocityInt = min(127, velocityInt);
 		mMidiOutput->sendNoteOn(1, mMidiPitch, velocityInt);
 		mNoteIsPlaying = true;
+		// For visual effects - we remember when the note started and its velocity
+		mTimeNoteStarted = ofGetElapsedTimef();
+		mNoteVelocity = velocity;
 	}
 	else if (amountAboveThreshold < 0 && mNoteIsPlaying)
 	{
@@ -89,9 +94,19 @@ void SimpleThresholdTrigger::draw()
 	float locationRadius = min(mLocation.width, mLocation.height) / 2.;
 	ofCircle(center, mThreshold * locationRadius);
 	// Then draw the movement amount as a colour circle growing out of it
-	int red = (int)(mPreviousMovement * 224.);
+	int red = (int)(mPreviousMovement * 244.);
 	int green = (int)(mPreviousMovement * 100. + 30);
-	int blue = (int)(mPreviousMovement * 243.);
+	int blue = min(0,(int)((.4 - .1*mPreviousMovement) * 43.));
 	ofSetColor(red, green, blue, 255);
 	ofCircle(center, mPreviousMovement * locationRadius);
+	
+	// Some small visual effects
+	if (mNoteIsPlaying)
+	{
+		float t = ofGetElapsedTimef() - mTimeNoteStarted;
+		if (t<1.)
+		{
+			
+		}
+	}
 }
