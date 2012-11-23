@@ -1,8 +1,16 @@
 Webcam Instruments
 ==================
 
-This is a simple openFrameworks project that uses OpenCV to create an instrument from the webcam. 
+This is a simple [openFrameworks][of] project that uses [OpenCV][cv] to create an instrument from the webcam. 
 
-Created by Tim Murray-Browne for a workshop organised by London's Music Hackspace on 25 November 2012 on a Sound and Music Embedded Composer residency.
+Created by [Tim Murray-Browne][tmb] for a [workshop][w] organised by London's [Music Hackspace][mhs] on 25 November 2012 on a Sound and Music Embedded Composer residency.
 
 This software is released under the Modified BSD licence.
+
+[of]: http://www.openframeworks.cc/
+[cv]: http://opencv.org/
+[tmb]: http://timmb.com
+[w]: http://musichackspace.org/music-hackspace-ensemble-webcam-instrument-workshop/
+[mhs]: http://musichackspace.org/
+
+
