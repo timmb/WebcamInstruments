@@ -1,6 +1,6 @@
 #include "testApp.h"
 
-const int testApp::MAX_TRIGGERS_IN_LINE;
+//const int testApp::MAX_TRIGGERS_IN_LINE;
 
 //--------------------------------------------------------------
 void testApp::setup(){
