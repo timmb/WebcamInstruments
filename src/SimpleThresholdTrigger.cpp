@@ -95,18 +95,36 @@ void SimpleThresholdTrigger::draw()
 	ofCircle(center, mThreshold * locationRadius);
 	// Then draw the movement amount as a colour circle growing out of it
 	int red = (int)(mPreviousMovement * 244.);
-	int green = (int)(mPreviousMovement * 100. + 30);
-	int blue = min(0,(int)((.4 - .1*mPreviousMovement) * 43.));
-	ofSetColor(red, green, blue, 255);
+	int green = (int)(mPreviousMovement * 10. + 30);
+	int blue = max(0,(int)((.4 - .1*mPreviousMovement) * 43.)+130);
+	ofColor circleColor = ofColor(red, green, blue, 255);
+	ofSetColor(circleColor);
 	ofCircle(center, mPreviousMovement * locationRadius);
 	
-	// Some small visual effects
-	if (mNoteIsPlaying)
+	// Some small visual effect of a ring moving outwards
+//	if (mNoteIsPlaying)
 	{
 		float t = ofGetElapsedTimef() - mTimeNoteStarted;
-		if (t<1.)
+		float circleLifetime = 5.f;
+		// to prevent artefacts, we add a little bit onto the lifetime
+		// based on which circle we're in.
+		// Seed the random number generator so that each trigger always gets the same number each frame
+		ofSeedRandom(int(1000. * mLocation.x) + int(1000000. * mLocation.y) + 2367);
+		circleLifetime = circleLifetime + ofRandom(0.f, 3.f);
+		if (t<circleLifetime)
 		{
-			
+			t = t/circleLifetime; // scale t to between 0 and 1
+			t = ofClamp(t, 0., 1.);
+			// Fade to white over 5 seconds
+			circleColor.lerp(ofColor::white, pow(t*.7f+.3f, .6f));
+			// draw the circle the at threshold size when the note is first plaing
+			// and a larger size when it stops playing, fading out
+			float radius = mThreshold * locationRadius * (pow(t, .25f) * 20. + 1.);
+			float opacity = pow(1.f - t, 3.f) * .4;
+			circleColor.a = opacity * 255;
+			ofSetColor(circleColor);
+//			glColor4f(circleColor.r/255., circleColor.g/255., circleColor.b/255., opacity);
+			ofCircle(center, radius);
 		}
 	}
 }

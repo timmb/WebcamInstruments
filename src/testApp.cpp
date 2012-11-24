@@ -1,6 +1,6 @@
 #include "testApp.h"
 
-//const int testApp::MAX_TRIGGERS_IN_LINE;
+const int MAX_TRIGGERS_IN_LINE = 150;
 
 //--------------------------------------------------------------
 void testApp::setup(){
@@ -17,8 +17,10 @@ void testApp::setup(){
 	mDrawDifferenceImage = ofxParameter<bool>("Draw thresholded image", false);
 	mMuteTriggers = ofxParameter<bool>("Mute triggers", false);
 	mTriggerCols = ofxParameter<int>("Number of trigger columns", 12);
+	mTriggerCols.setMin(0);
 	mTriggerCols.setMax(MAX_TRIGGERS_IN_LINE);
 	mTriggerRows = ofxParameter<int>("Number of trigger rows", 6);
+	mTriggerRows.setMin(0);
 	mTriggerRows.setMax(MAX_TRIGGERS_IN_LINE);
 	mThresholdValue = ofxParameter<float>("Threshold value", .03);
 	mThresholdValue.setMin(0.);

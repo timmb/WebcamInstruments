@@ -72,7 +72,6 @@ public:
 	vector<vector<SimpleThresholdTrigger*> > mTriggers;
 	void setupTriggers();
 	/// How many triggers we want to overlay over the frame
-	static const int MAX_TRIGGERS_IN_LINE = 200;
 	ofxParameter<int> mTriggerRows;
 	ofxParameter<int> mTriggerCols;
 	ofxParameter<float> mThresholdValue;
