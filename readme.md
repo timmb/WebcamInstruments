@@ -1,11 +1,19 @@
 Webcam Instruments
 ==================
 
-This is a simple [openFrameworks][of] project that uses [OpenCV][cv] to create an instrument from the webcam. The interface and visuals are inspired by Memo Akten's [Webcam Piano 2.0][wp]
+This is a simple [openFrameworks][of] project that uses [OpenCV][cv] to create an instrument from the webcam. The interface and visuals are inspired by Memo Akten's [Webcam Piano 2.0][wp].
 
 Created by [Tim Murray-Browne][tmb] for a [workshop][w] organised by London's [Music Hackspace][mhs] on 25 November 2012 on a Sound and Music Embedded Composer residency.
 
 This software (excluding ofxGui.zip) is released under the Modified BSD Licence. ofxGui.zip is a part of openFrameworks which is released under the MIT Licence.
+
+Installation
+------------
+
+Please see the file `presentation slides.pdf` for instructions on setting up the project. If there are gaps in those instructions then please feel free to fork the project, update this file and submit a pull request.
+
+Tim Murray-Browne
+London, December 2012
 
 [cv]: http://opencv.org/
 [mhs]: http://musichackspace.org/
