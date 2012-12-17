@@ -12,8 +12,7 @@ Installation
 
 Please see the file `presentation slides.pdf` for instructions on setting up the project. If there are gaps in those instructions then please feel free to fork the project, update this file and submit a pull request.
 
-_Tim Murray-Browne_
-
+_Tim Murray-Browne_  
 _London, December 2012_
 
 [cv]: http://opencv.org/
